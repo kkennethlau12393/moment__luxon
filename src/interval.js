@@ -285,10 +285,7 @@ export default class Interval {
    * @return {boolean}
    */
   hasSame(unit) {
-    if (!this.isValid) return false;
-    // For an empty interval, compare the endpoints directly so that endpoints
-    // in different zones (with differing local unit values) are respected.
-    return this.isEmpty() ? this.s.hasSame(this.e, unit) : this.e.minus(1).hasSame(this.s, unit);
+    return this.isValid ? this.isEmpty() || this.e.minus(1).hasSame(this.s, unit) : false;
   }
 
   /**
